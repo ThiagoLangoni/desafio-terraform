@@ -1,20 +1,22 @@
 locals {
   env = "${terraform.workspace}"
 
-  // Isolate variables used for different workspaces
-  // using map
   context = {
     default = {
-      name = "${var.filename}-dev.txt"
+      name = "${var.filename}-dev.txt",
+      quantidadeInstancias = 2
     }
     dev = {
       name = "${var.filename}-dev.txt"
+      quantidadeInstancias = 2
     }
     homol = {
       name = "${var.filename}-homol.txt"
+      quantidadeInstancias = 3
     }
     prod = {
       name = "${var.filename}-prod.txt"
+      quantidadeInstancias = 4
     }
   }
 
@@ -23,6 +25,6 @@ locals {
 
 // Creates a new local file with the given filename and content
 resource "local_file" "test" {
-  content     = "${local.env}"
+  content  = "${local.env}${lookup(local.context_variables, "quantidadeInstancias")}"
   filename = "${path.module}/${lookup(local.context_variables, "name")}"
 }
