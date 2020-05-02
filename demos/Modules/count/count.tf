@@ -32,7 +32,7 @@ resource "random_shuffle" "random_subnet" {
 }
 
 resource "aws_elb" "web" {
-  name = "terraform-example-elb"
+  name = "terraform-${terraform.workspace}-elb"
 
   subnets         = data.aws_subnet_ids.all.ids
   security_groups = ["${aws_security_group.allow-ssh.id}"]
@@ -67,7 +67,7 @@ resource "aws_instance" "web" {
   key_name               = "${var.KEY_NAME}"
 
   provisioner "file" {
-    source      = "script.sh"
+    source      = "../count-call/script.sh"
     destination = "/tmp/script.sh"
   }
 

@@ -3,16 +3,16 @@ locals {
 
   context = {
     default = {
-      quantidadeInstancias = 2
+      quantidadeInstancias = 1
     }
     dev = {
-      quantidadeInstancias = 2
+      quantidadeInstancias = 1
     }
     homol = {
-      quantidadeInstancias = 3
+      quantidadeInstancias = 1
     }
     prod = {
-      quantidadeInstancias = 4
+      quantidadeInstancias = 2
     }
   }
 
